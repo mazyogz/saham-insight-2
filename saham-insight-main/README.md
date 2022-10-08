@@ -1,1 +1,0 @@
-# InsightSaham.id
