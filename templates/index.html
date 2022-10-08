@@ -1,0 +1,72 @@
+{% include "header.html" %}
+
+    <!-- Title Section -->
+    <section class="colored-section" id="title">
+        <div class="container-fluid">
+            <h1 class="big-heading">Lihat prediksi saham dalam 1 klik.</h1>
+            <h4>Cari dan pilih prediksi saham di sini, jangan sampai kamu salah beli!</h4>
+            
+                <form action="{{ url_for('cari') }}" method="post">
+                    <div class="input-group input-group-lg search-input">
+                    <input type="text" class="form-control" placeholder="{{ rand_saham.kode }}" name="cari" style="text-transform:uppercase;">
+                    <div class="input-group-append">
+                        <button class="btn btn-warning" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                </form>
+                
+        </div>
+    </section>
+
+    <!-- Predict Section -->
+    <section class="white-section" id="predict">
+        <div class="container-fluid">
+            <h1 class="section-heading">Pilih prediksi saham</h1>
+
+
+            <div class="row">
+                <!-- <div class="predict-box col-lg-4 col-md-6 col-sm-6">
+                    <div class="card text-center">
+                        <img src="static/images/indofood-img2.jpg" class="card-img-top" alt="logo-indofood">
+                        <div class="card-body">
+                            <a href="{{ url_for('saham') }}" class="card-text btn stretched-link">Indofood Sukses Makmur Tbk
+                                (INDF)</a>
+                            <img src="static/images/prediction-img.png" class="card-img-top thumbnail-img"
+                                alt="prediction-image">
+                        </div>
+                    </div>
+                </div> -->
+                {% for shm in saham: %}
+                <div class="predict-box col-lg-4 col-md-6 col-sm-6">
+                    <div class="card text-center">
+                        <img src="static/images/saham/{{ shm.kode }}.jpg" class="card-img-top"
+                            alt="logo-{{ shm.kode }}">
+                        <div class="card-body">
+                            <a href="{{ url_for('saham', kode_saham = shm.kode) }}"
+                                class="card-text btn stretched-link">{{ shm.nama }}
+                                ({{ shm.kode }})</a>
+                            <img src="{{url_for ('static', filename='images/saham/'+shm.kode+'_PRED.jpg')}}"
+                                class="card-img-top thumbnail-img" alt="prediksi-{{ shm.kode }}">
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                
+
+            </div>
+            <form action="{{ url_for('cari') }}" method="post">
+                <div class="input-group input-group-lg search-input">
+                <input type="text" class="form-control" placeholder="{{ rand_saham.kode }}" name="cari">
+                <div class="input-group-append">
+                    <button class="btn btn-warning" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            </form>
+    </section>
+
+    {% include "footer.html" %}
