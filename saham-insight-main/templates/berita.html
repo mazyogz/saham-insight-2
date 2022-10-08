@@ -1,0 +1,25 @@
+{% include "header.html" %}
+
+    <!-- All News -->
+    <section class="white-section" id="all-news">
+        <div class="container-fluid">
+            <h1 class="section-heading">Semua Berita Saham</h1>
+            {% for brt in berita: %}
+            <div class="media mt-3">
+                <img class="mr-3 news-image" src="static/images/berita/{{ brt.judul }}.jpg"
+                    alt="Gambar berita {{ brt.judul }}">
+                <div class="media-body">
+                    <a href="{{ brt.link_url }}">{{ brt.judul }}</a>
+                    <p class="gray-text">Sumber: {{ brt.sumber }} - {{ brt.tanggal_publish.strftime('%d %b %Y') }}</p>
+                    <p class="news-text read-p">{{ brt.teras }}</p>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        </div>
+
+
+    </section>
+
+    {% include "footer.html" %}
